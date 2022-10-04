@@ -1,0 +1,29 @@
+{
+    "kind": "collectionType",
+    "collectionName": "sub_categories",
+    "info": {
+        "singularName": "sub-category",
+        "pluralName": "sub-categories",
+        "displayName": "SubCategory"
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "name": {
+            "type": "string",
+            "required": true
+        },
+        "cover": {
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ],
+            "type": "media",
+            "multiple": false
+        }
+    }
+}
