@@ -1,0 +1,32 @@
+{
+    "kind": "collectionType",
+    "collectionName": "varients",
+    "info": {
+        "singularName": "varient",
+        "pluralName": "varients",
+        "displayName": "Varient"
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "name": {
+            "type": "string",
+            "required": true
+        },
+        "price": {
+            "type": "decimal"
+        },
+        "images": {
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ],
+            "type": "media",
+            "multiple": true
+        }
+    }
+}

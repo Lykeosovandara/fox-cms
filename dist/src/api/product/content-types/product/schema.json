@@ -27,6 +27,27 @@
             "type": "relation",
             "relation": "oneToOne",
             "target": "api::brand.brand"
+        },
+        "category": {
+            "type": "relation",
+            "relation": "oneToOne",
+            "target": "api::category.category"
+        },
+        "image": {
+            "type": "media",
+            "multiple": false,
+            "required": false,
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ]
+        },
+        "varients": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::varient.varient"
         }
     }
 }
