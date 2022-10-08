@@ -13,6 +13,7 @@ export default ({ env }) => ({
       user: pgS.parse(env('DATABASE_URL')).user,
       password: pgS.parse(env('DATABASE_URL')).password,
       ssl: {
+        /// Pleasse 
         rejectUnauthorized: false, 
       },
     },
