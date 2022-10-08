@@ -5,6 +5,7 @@ exports.default = ({ env }) => ({
         client: 'postgres',
         connection: {
             url: env("DATABASE_URL_APP"),
+            // Why 
         },
     },
 });
