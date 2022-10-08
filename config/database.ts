@@ -14,7 +14,6 @@ export default ({ env }) => ({
       password: pgS.parse(env('DATABASE_URL')).password,
       ssl: {
         rejectUnauthorized: false, 
-        // rejectUnauthorized: false, 
       },
     },
   },
