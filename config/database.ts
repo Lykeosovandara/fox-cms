@@ -6,7 +6,7 @@ import * as pgS from "pg-connection-string";
 /// GOd
 console.log(process.env.DATABASE_URL);
 
-// ss
+// ss last time man
 
 export default ({ env }) => ({
   connection: {
