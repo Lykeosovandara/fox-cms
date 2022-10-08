@@ -15,6 +15,5 @@ export default ({ env }) => ({
         rejectUnauthorized: false,
       },
     },
-    debug: false,
   },
 });
