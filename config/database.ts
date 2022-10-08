@@ -6,10 +6,8 @@ export default ({ env }) => ({
   connection: {
     client: 'postgres',
     connection: {
-      url: env("DATABASE_URL"),
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      url: env("DATABASE_URL_APP"),
+      
     },
   },
 });

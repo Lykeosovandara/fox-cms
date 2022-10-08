@@ -4,14 +4,7 @@ exports.default = ({ env }) => ({
     connection: {
         client: 'postgres',
         connection: {
-            host: env('DATABASE_HOST'),
-            port: env.int('DATABASE_PORT'),
-            database: env('DATABASE_NAME'),
-            user: env('DATABASE_USERNAME'),
-            password: env('DATABASE_PASSWORD'),
-            ssl: {
-                rejectUnauthorized: false,
-            },
+            url: env("DATABASE_URL_APP"),
         },
     },
 });
