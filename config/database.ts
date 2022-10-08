@@ -9,6 +9,7 @@ module.exports = ({ env }) => {
   );
 
   console.log("=====>", host);
+  console.log("=====>", host);
 
 
   return {
