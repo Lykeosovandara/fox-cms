@@ -1,31 +1,20 @@
-import { parse } from "pg-connection-string";
+import * as pgS from "pg-connection-string";
 
 
 
-module.exports = ({ env }) => {
 
-  const { host, port, database, user, password } = parse(
-    process.env.DATABASE_URL
-  );
-
-  console.log("=====>", host);
-  console.log("=====>", host);
-
-
-  return {
+export default ({ env }) => ({
+  connection: {
+    client: env('postgres'),
     connection: {
-      client: "postgres",
-      connection: {
-        host,
-        port,
-        database,
-        user,
-        password,
-        ssl: {
-          rejectUnauthorized: env.bool("DATABASE_SSL_SELF", false), // For self-signed certificates
-        },
+      host: pgS.parse(env('DATABASE_URL')).host,
+      port: pgS.parse(env.int('DATABASE_URL')).port,
+      database: pgS.parse(env('DATABASE_URL')).database,
+      user: pgS.parse(env('DATABASE_URL')).user,
+      password: pgS.parse(env('DATABASE_URL')).password,
+      ssl: {
+        rejectUnauthorized: false, 
       },
     },
-  };
-
-};
+  },
+});
