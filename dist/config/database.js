@@ -25,14 +25,24 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const pgS = __importStar(require("pg-connection-string"));
 exports.default = ({ env }) => ({
+    // connection: {
+    //   client: 'postgres',
+    //   connection: {
+    //     host: process.env.DATABASE_HOST,
+    //     port: process.env.DATABASE_PORT,
+    //     database: process.env.DATABASE_NAME,
+    //     user: process.env.DATABASE_USERNAME,
+    //     password: process.env.DATABASE_PASSWORD,
+    //   },
+    // },
     connection: {
-        client: env('postgres'),
+        client: 'postgres',
         connection: {
-            host: pgS.parse(process.env.DATABASE_URL_APP).host,
-            port: pgS.parse(process.env.DATABASE_URL_APP).port,
-            database: pgS.parse(process.env.DATABASE_URL_APP).database,
-            user: pgS.parse(process.env.DATABASE_URL_APP).user,
-            password: pgS.parse(process.env.DATABASE_URL_APP).password,
+            host: pgS.parse(process.env.DATABASE_URL).host,
+            port: pgS.parse(process.env.DATABASE_URL).port,
+            database: pgS.parse(process.env.DATABASE_URL).database,
+            user: pgS.parse(process.env.DATABASE_URL).user,
+            password: pgS.parse(process.env.DATABASE_URL).password,
             ssl: {
                 rejectUnauthorized: false,
             },
