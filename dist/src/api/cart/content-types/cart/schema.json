@@ -32,6 +32,16 @@
             "type": "relation",
             "relation": "oneToOne",
             "target": "api::varient.varient"
+        },
+        "varientImage": {
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ],
+            "type": "media",
+            "multiple": false
         }
     }
 }
