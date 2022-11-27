@@ -58,8 +58,11 @@ export default factories.createCoreController('api::cart.cart', ({ strapi: Strap
         let [cart] = await strapi.entityService
             .findMany('api::cart.cart', {
                 filters: {
-                    id: ctx.request.params.id,
-                    author: id
+                    owner: {
+                        id: {
+                            $eq: id ?? 0
+                        },
+                    }
                 }
             })
         if (cart) {
@@ -69,6 +72,8 @@ export default factories.createCoreController('api::cart.cart', ({ strapi: Strap
             return ctx.unauthorized();
         }
     }
+
+
 
 
 }));
