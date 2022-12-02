@@ -13,4 +13,6 @@ export default factories.createCoreController('api::product.product', ({ strapi 
         }
     },
 
+    /// Trigger build
+
 }));
