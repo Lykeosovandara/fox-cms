@@ -18,18 +18,38 @@ exports.default = strapi_1.factories.createCoreController('api::cart.cart', ({ s
     },
     async create(ctx) {
         const { user: { id } } = ctx.state;
-        let response = await super.create(ctx);
-        const updatedResponse = await strapi.entityService
-            .update('api::cart.cart', response.data.id, { data: { owner: id } });
-        return updatedResponse;
+        const { varient } = ctx.request.body.data;
+        const [cart] = await strapi.entityService.findMany('api::cart.cart', {
+            populate: { varient: true },
+            filters: {
+                varient: {
+                    id: {
+                        $eq: varient !== null && varient !== void 0 ? varient : 0
+                    },
+                }
+            },
+        });
+        if (cart) {
+            let oldQty = cart.qty;
+            oldQty += 1;
+            const updatedResponse = await strapi.entityService
+                .update('api::cart.cart', cart.id, { data: { qty: oldQty } });
+            return updatedResponse;
+        }
+        else {
+            return await super.create(ctx);
+        }
     },
     async update(ctx) {
         let { id } = ctx.state.user;
         let [cart] = await strapi.entityService
             .findMany('api::cart.cart', {
             filters: {
-                id: ctx.request.params.id,
-                author: id
+                owner: {
+                    id: {
+                        $eq: id !== null && id !== void 0 ? id : 0
+                    },
+                }
             }
         });
         if (cart) {

@@ -48,6 +48,11 @@
             "type": "relation",
             "relation": "oneToMany",
             "target": "api::varient.varient"
+        },
+        "sub_category": {
+            "type": "relation",
+            "relation": "oneToOne",
+            "target": "api::sub-category.sub-category"
         }
     }
 }

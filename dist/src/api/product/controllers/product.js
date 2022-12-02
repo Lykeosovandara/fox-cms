@@ -11,4 +11,5 @@ exports.default = strapi_1.factories.createCoreController('api::product.product'
             data: "Sucess"
         };
     },
+    /// Trigger build
 }));
