@@ -19,6 +19,16 @@
             "type": "relation",
             "relation": "oneToMany",
             "target": "api::sub-category.sub-category"
+        },
+        "image": {
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ],
+            "type": "media",
+            "multiple": false
         }
     }
 }
