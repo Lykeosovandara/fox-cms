@@ -4,7 +4,8 @@
     "info": {
         "singularName": "order",
         "pluralName": "orders",
-        "displayName": "Order"
+        "displayName": "Order",
+        "description": ""
     },
     "options": {
         "draftAndPublish": false
@@ -23,6 +24,15 @@
         },
         "addressDelivery": {
             "type": "json"
+        },
+        "province": {
+            "type": "relation",
+            "relation": "oneToOne",
+            "target": "api::province.province"
+        },
+        "phone": {
+            "type": "string",
+            "required": true
         }
     }
 }
