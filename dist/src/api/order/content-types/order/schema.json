@@ -17,13 +17,15 @@
             "required": true
         },
         "total": {
-            "type": "decimal"
+            "type": "decimal",
+            "required": true
         },
         "deliveryCost": {
             "type": "decimal"
         },
         "addressDelivery": {
-            "type": "json"
+            "type": "json",
+            "required": true
         },
         "province": {
             "type": "relation",
@@ -34,14 +36,11 @@
             "type": "string",
             "required": true
         },
-        "users_permissions_user": {
+        "owner": {
             "type": "relation",
             "relation": "manyToOne",
             "target": "plugin::users-permissions.user",
             "inversedBy": "orders"
-        },
-        "location": {
-            "type": "json"
         },
         "district": {
             "type": "relation",
