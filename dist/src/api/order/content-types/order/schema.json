@@ -33,6 +33,20 @@
         "phone": {
             "type": "string",
             "required": true
+        },
+        "users_permissions_user": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "plugin::users-permissions.user",
+            "inversedBy": "orders"
+        },
+        "location": {
+            "type": "json"
+        },
+        "district": {
+            "type": "relation",
+            "relation": "oneToOne",
+            "target": "api::district.district"
         }
     }
 }

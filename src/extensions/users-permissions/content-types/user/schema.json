@@ -68,6 +68,12 @@
       "relation": "oneToMany",
       "target": "api::cart.cart",
       "mappedBy": "owner"
+    },
+    "orders": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order.order",
+      "mappedBy": "users_permissions_user"
     }
   }
 }
