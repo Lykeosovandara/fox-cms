@@ -45,8 +45,8 @@ export default factories.createCoreController('api::order.order', ({ strapi: Str
         const province = await strapi.entityService.findOne('api::province.province', provinceId);
         const district = await strapi.entityService.findOne('api::district.district', districtId);
 
-        if (items.includes(null)) {
-            return ctx.badRequest('cart id invalid', { "cartids": cartIds })
+        if (items.includes(null) || !province || !district) {
+            return ctx.badRequest(' id invalid', { cartIds, provinceId, districtId })
         }
 
 
@@ -55,16 +55,22 @@ export default factories.createCoreController('api::order.order', ({ strapi: Str
             district
         }
         const total = items.reduce((a, b) => a + (b.varient.price, b.qty), 0);
+        const deliveryCost = province.price;
 
-        ctx.request.body.data = { ...ctx.request.body.data, items, total, owner: id, addressDelivery, province: provinceId, district: districtId };
+        ctx.request.body.data = { ...ctx.request.body.data, items, total, owner: id, addressDelivery, province: provinceId, district: districtId, deliveryCost };
 
 
-        console.log(ctx.request.body.data);
 
-        return strapi.entityService.create("api::order.order", ctx.request.body);
+        await strapi.entityService.create("api::order.order", ctx.request.body);
 
-        // return await super.create(ctx);
 
+        let promisesdDel = [];
+
+        cartIds.forEach((id) => {
+            promisesdDel.push(strapi.entityService.delete('api::cart.cart', id));
+        });
+
+        return await Promise.all(promisesdDel);
     },
 
 

@@ -31,17 +31,21 @@ exports.default = strapi_1.factories.createCoreController('api::order.order', ({
         const items = await Promise.all(promises);
         const province = await strapi.entityService.findOne('api::province.province', provinceId);
         const district = await strapi.entityService.findOne('api::district.district', districtId);
-        if (items.includes(null)) {
-            return ctx.badRequest('cart id invalid', { "cartids": cartIds });
+        if (items.includes(null) || !province || !district) {
+            return ctx.badRequest(' id invalid', { cartIds, provinceId, districtId });
         }
         const addressDelivery = {
             province,
             district
         };
         const total = items.reduce((a, b) => a + (b.varient.price, b.qty), 0);
-        ctx.request.body.data = { ...ctx.request.body.data, items, total, owner: id, addressDelivery, province: provinceId, district: districtId };
-        console.log(ctx.request.body.data);
-        return strapi.entityService.create("api::order.order", ctx.request.body);
-        // return await super.create(ctx);
+        const deliveryCost = province.price;
+        ctx.request.body.data = { ...ctx.request.body.data, items, total, owner: id, addressDelivery, province: provinceId, district: districtId, deliveryCost };
+        await strapi.entityService.create("api::order.order", ctx.request.body);
+        let promisesdDel = [];
+        cartIds.forEach((id) => {
+            promisesdDel.push(strapi.entityService.delete('api::cart.cart', id));
+        });
+        return await Promise.all(promisesdDel);
     },
 }));
