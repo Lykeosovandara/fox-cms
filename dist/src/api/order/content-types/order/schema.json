@@ -46,6 +46,9 @@
             "type": "relation",
             "relation": "oneToOne",
             "target": "api::district.district"
+        },
+        "address": {
+            "type": "string"
         }
     }
 }

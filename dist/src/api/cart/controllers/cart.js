@@ -37,7 +37,7 @@ exports.default = strapi_1.factories.createCoreController('api::cart.cart', ({ s
             return updatedResponse;
         }
         else {
-            return await super.create(ctx);
+            return await strapi.entityService.create("api::cart.cart", ctx.request.body);
         }
     },
     async update(ctx) {
