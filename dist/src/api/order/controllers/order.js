@@ -41,6 +41,5 @@ exports.default = strapi_1.factories.createCoreController('api::order.order', ({
         const total = items.reduce((a, b) => a + (b.varient.price, b.qty), 0);
         ctx.request.body.data = { ...ctx.request.body.data, items, total, owner: id, addressDelivery };
         return await super.create(ctx);
-        // return items;
     },
 }));

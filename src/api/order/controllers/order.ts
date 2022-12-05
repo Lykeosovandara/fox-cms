@@ -32,6 +32,7 @@ export default factories.createCoreController('api::order.order', ({ strapi: Str
         }
 
         let promises = [];
+
         cartIds.forEach((id) => {
             promises.push(strapi.entityService.findOne('api::cart.cart', id, {
                 populate: "*"
@@ -60,13 +61,7 @@ export default factories.createCoreController('api::order.order', ({ strapi: Str
 
         return await super.create(ctx);
 
-        // return items;
-
     },
-
-
-
-
 
 
 }));    

@@ -19,6 +19,11 @@
             "type": "relation",
             "relation": "oneToMany",
             "target": "api::district.district"
+        },
+        "price": {
+            "type": "decimal",
+            "required": true,
+            "default": 0
         }
     }
 }
