@@ -49,6 +49,16 @@
         },
         "address": {
             "type": "string"
+        },
+        "status": {
+            "type": "enumeration",
+            "enum": [
+                "Pending",
+                "Completed",
+                "Refunded",
+                "Declined"
+            ],
+            "default": "Pending"
         }
     }
 }

@@ -16,10 +16,10 @@ export default factories.createCoreController('api::order.order', ({ strapi: Str
 
         console.log(ctx.query);
 
-        const data = await strapi.entityService.findMany('api::cart.cart',
+        const data = await strapi.entityService.findMany('api::order.order',
             {
                 ...ctx.query,
-                populate: "*",
+                populate: [],
                 filters: {
                     owner: {
                         id: {
@@ -45,10 +45,9 @@ export default factories.createCoreController('api::order.order', ({ strapi: Str
 
         cartIds.forEach((id) => {
             promises.push(strapi.entityService.findOne('api::cart.cart', id, {
-                populate: "*"
+                populate: ["product", "varient", "varientImage"],
             }));
         });
-
 
 
         const items = await Promise.all(promises);

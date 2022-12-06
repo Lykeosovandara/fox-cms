@@ -10,7 +10,7 @@ exports.default = strapi_1.factories.createCoreController('api::cart.cart', ({ s
         let meta = {};
         const data = await strapi.entityService.findMany('api::cart.cart', {
             ...ctx.query,
-            populate: "*",
+            populate: ["product", "varient", "varientImage"],
             filters: {
                 owner: {
                     id: {
