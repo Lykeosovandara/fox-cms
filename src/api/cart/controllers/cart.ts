@@ -7,18 +7,22 @@ import { sanitizeEntity } from "@strapi/utils"
 
 export default factories.createCoreController('api::cart.cart', ({ strapi: Strapi }) => ({
     async find(ctx) {
-        // some custom logic here
 
         const { user: { id } } = ctx.state;
-        ctx.query = { ...ctx.query, local: 'en', "owner.id": id };
-        // console.log(id);
-
-
-        // Calling the default core action
-        const { data, meta } = await super.find(ctx);
-
-        // some more custom logic
-        meta.date = Date.now();
+        ctx.query = {
+            ...ctx.query,
+            filters: {
+                owner: {
+                    id: {
+                        $eq: id
+                    }
+                },
+            },
+        };
+        let meta = {};
+        const data = await strapi.entityService.findMany('api::cart.cart',
+            ctx.query
+        )
 
         return { data, meta };
     },
