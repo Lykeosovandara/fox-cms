@@ -8,12 +8,19 @@ exports.default = strapi_1.factories.createCoreController('api::order.order', ({
     async find(ctx) {
         // some custom logic here
         const { user: { id } } = ctx.state;
-        ctx.query = { ...ctx.query, local: 'en', "owner.id": id };
-        // console.log(id);
-        // Calling the default core action
-        const { data, meta } = await super.find(ctx);
-        // some more custom logic
-        meta.date = Date.now();
+        let meta = {};
+        console.log(ctx.query);
+        const data = await strapi.entityService.findMany('api::cart.cart', {
+            ...ctx.query,
+            populate: "*",
+            filters: {
+                owner: {
+                    id: {
+                        $eq: id
+                    }
+                },
+            }
+        });
         return { data, meta };
     },
     async create(ctx) {

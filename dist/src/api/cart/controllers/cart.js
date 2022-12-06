@@ -7,18 +7,18 @@ const strapi_1 = require("@strapi/strapi");
 exports.default = strapi_1.factories.createCoreController('api::cart.cart', ({ strapi: Strapi }) => ({
     async find(ctx) {
         const { user: { id } } = ctx.state;
-        ctx.query = {
+        let meta = {};
+        const data = await strapi.entityService.findMany('api::cart.cart', {
             ...ctx.query,
+            populate: "*",
             filters: {
                 owner: {
                     id: {
                         $eq: id
                     }
                 },
-            },
-        };
-        let meta = {};
-        const data = await strapi.entityService.findMany('api::cart.cart', ctx.query);
+            }
+        });
         return { data, meta };
     },
     async create(ctx) {
