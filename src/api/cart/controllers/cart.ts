@@ -3,7 +3,7 @@
  */
 
 import { factories, Strapi } from '@strapi/strapi'
-import { sanitizeEntity } from "@strapi/utils"
+
 
 export default factories.createCoreController('api::cart.cart', ({ strapi: Strapi }) => ({
     async find(ctx) {
@@ -75,8 +75,5 @@ export default factories.createCoreController('api::cart.cart', ({ strapi: Strap
             return ctx.unauthorized();
         }
     }
-
-
-
 
 }));

@@ -74,6 +74,25 @@
             "relation": "oneToMany",
             "target": "api::order.order",
             "mappedBy": "owner"
+        },
+        "image": {
+            "type": "media",
+            "multiple": false,
+            "required": false,
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ]
+        },
+        "gender": {
+            "type": "enumeration",
+            "enum": [
+                "male",
+                "female",
+                "other"
+            ]
         }
     }
 }
