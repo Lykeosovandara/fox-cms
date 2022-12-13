@@ -4,7 +4,8 @@
     "info": {
         "singularName": "home-banner",
         "pluralName": "home-banners",
-        "displayName": "HomeBanner"
+        "displayName": "HomeBanner",
+        "description": ""
     },
     "options": {
         "draftAndPublish": false
@@ -12,26 +13,26 @@
     "pluginOptions": {},
     "attributes": {
         "light": {
-            "allowedTypes": [
-                "images",
-                "files",
-                "videos",
-                "audios"
-            ],
             "type": "media",
             "multiple": false,
-            "required": true
-        },
-        "dark": {
+            "required": true,
             "allowedTypes": [
                 "images",
                 "files",
                 "videos",
                 "audios"
-            ],
+            ]
+        },
+        "dark": {
             "type": "media",
-            "multiple": true,
-            "required": true
+            "multiple": false,
+            "required": true,
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ]
         }
     }
 }
