@@ -32,6 +32,28 @@ export default factories.createCoreController('api::order.order', ({ strapi: Str
 
         return { data, meta };
     },
+    async findOne(ctx) {
+        // some custom logic here
+
+        const { user: { id } } = ctx.state;
+
+        const orderid = ctx.params.id;
+
+
+        const data = await strapi.entityService.findOne('api::order.order', orderid, {
+            filters: {
+                owner: {
+                    id: {
+                        $eq: id
+                    }
+                },
+            }
+        }
+
+        )
+
+        return { data };
+    },
     async create(ctx) {
         const { user: { id } } = ctx.state;
 
