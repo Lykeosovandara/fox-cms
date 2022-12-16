@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "collectionName": "order_policies",
+  "info": {
+    "singularName": "order-policy",
+    "pluralName": "order-policies",
+    "displayName": "OrderPolicy"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "content": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}
