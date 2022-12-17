@@ -54,6 +54,8 @@
       "type": "enumeration",
       "enum": [
         "Pending",
+        "Proccessing",
+        "Shipping",
         "Completed",
         "Refunded",
         "Declined"

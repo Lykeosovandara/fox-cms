@@ -6,14 +6,35 @@ import { factories } from '@strapi/strapi'
 
 
 export default factories.createCoreController('api::order.order', ({ strapi: Strapi }) => ({
+
+    async updateProfile(ctx) {
+
+        const { user: { id } } = ctx.state;
+
+
+        const { image } = ctx.request.body.data;
+
+        if (!image) {
+            return ctx.badRequest(' image invalid',);
+        }
+
+        await strapi.entityService.update(
+            'plugin::users-permissions.user',
+            id,
+            {
+                data: { image }
+            }
+        );
+
+        return {
+            success: true
+        }
+    },
+
     async find(ctx) {
 
         const { status, offset = 0, limit = 20 } = ctx.query;
         const { user: { id } } = ctx.state;
-
-
-        console.log(offset);
-
 
         const data = await strapi.entityService.findMany('api::order.order',
             {
@@ -91,10 +112,7 @@ export default factories.createCoreController('api::order.order', ({ strapi: Str
 
         ctx.request.body.data = { ...ctx.request.body.data, items, total, owner: id, addressDelivery, province: provinceId, district: districtId, deliveryCost };
 
-
-
         await strapi.entityService.create("api::order.order", ctx.request.body);
-
 
         let promisesdDel = [];
 

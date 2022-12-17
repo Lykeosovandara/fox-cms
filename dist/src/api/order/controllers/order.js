@@ -5,10 +5,22 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const strapi_1 = require("@strapi/strapi");
 exports.default = strapi_1.factories.createCoreController('api::order.order', ({ strapi: Strapi }) => ({
+    async updateProfile(ctx) {
+        const { user: { id } } = ctx.state;
+        const { image } = ctx.request.body.data;
+        if (!image) {
+            return ctx.badRequest(' image invalid');
+        }
+        await strapi.entityService.update('plugin::users-permissions.user', id, {
+            data: { image }
+        });
+        return {
+            success: true
+        };
+    },
     async find(ctx) {
         const { status, offset = 0, limit = 20 } = ctx.query;
         const { user: { id } } = ctx.state;
-        console.log(offset);
         const data = await strapi.entityService.findMany('api::order.order', {
             start: offset,
             limit,
