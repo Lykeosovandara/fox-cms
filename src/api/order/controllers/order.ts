@@ -7,14 +7,10 @@ import { factories } from '@strapi/strapi'
 
 export default factories.createCoreController('api::order.order', ({ strapi: Strapi }) => ({
     async find(ctx) {
-        // some custom logic here
 
+        const { status } = ctx.query;
         const { user: { id } } = ctx.state;
-
         let meta = {};
-
-
-        console.log(ctx.query);
 
         const data = await strapi.entityService.findMany('api::order.order',
             {
@@ -26,6 +22,7 @@ export default factories.createCoreController('api::order.order', ({ strapi: Str
                             $eq: id
                         }
                     },
+                    status: status ?? "Pending"
                 }
             }
         )

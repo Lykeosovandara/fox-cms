@@ -6,10 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const strapi_1 = require("@strapi/strapi");
 exports.default = strapi_1.factories.createCoreController('api::order.order', ({ strapi: Strapi }) => ({
     async find(ctx) {
-        // some custom logic here
+        const { status } = ctx.query;
         const { user: { id } } = ctx.state;
         let meta = {};
-        console.log(ctx.query);
         const data = await strapi.entityService.findMany('api::order.order', {
             ...ctx.query,
             populate: [],
@@ -19,6 +18,7 @@ exports.default = strapi_1.factories.createCoreController('api::order.order', ({
                         $eq: id
                     }
                 },
+                status: status !== null && status !== void 0 ? status : "Pending"
             }
         });
         return { data, meta };
