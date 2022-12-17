@@ -8,13 +8,17 @@ import { factories } from '@strapi/strapi'
 export default factories.createCoreController('api::order.order', ({ strapi: Strapi }) => ({
     async find(ctx) {
 
-        const { status } = ctx.query;
+        const { status, offset = 0, limit = 20 } = ctx.query;
         const { user: { id } } = ctx.state;
-        let meta = {};
+
+
+        console.log(offset);
+
 
         const data = await strapi.entityService.findMany('api::order.order',
             {
-                ...ctx.query,
+                start: offset,
+                limit,
                 populate: [],
                 filters: {
                     owner: {
@@ -27,7 +31,7 @@ export default factories.createCoreController('api::order.order', ({ strapi: Str
             }
         )
 
-        return { data, meta };
+        return { data };
     },
     async findOne(ctx) {
         // some custom logic here
