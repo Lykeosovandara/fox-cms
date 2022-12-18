@@ -44,15 +44,27 @@
         "audios"
       ]
     },
-    "varients": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::varient.varient"
-    },
     "sub_category": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::sub-category.sub-category"
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "varients": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::varient.varient",
+      "mappedBy": "product"
     }
   }
 }

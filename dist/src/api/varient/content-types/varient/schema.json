@@ -29,6 +29,12 @@
                 "videos",
                 "audios"
             ]
+        },
+        "product": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::product.product",
+            "inversedBy": "varients"
         }
     }
 }
