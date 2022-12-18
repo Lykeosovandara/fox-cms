@@ -8,7 +8,7 @@ exports.default = strapi_1.factories.createCoreController('api::product.product'
     async findOne(ctx) {
         const orderid = ctx.params.id;
         const data = await strapi.entityService.findOne('api::product.product', orderid, {
-            populate: ["images", "varients", "brands"],
+            populate: ["images", "varients", "brands", "image"],
         });
         const varients = data.varients;
         let promises = [];
