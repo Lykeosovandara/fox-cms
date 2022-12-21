@@ -3,9 +3,11 @@
  */
 
 import { factories } from '@strapi/strapi'
+import { Strapi } from '@strapi/strapi';
+const { Telegraf } = require('telegraf');
 
 
-export default factories.createCoreController('api::order.order', ({ strapi: Strapi }) => ({
+export default factories.createCoreController('api::order.order', ({ strapi }: { strapi: Strapi }) => ({
 
     async updateProfile(ctx) {
 
@@ -28,6 +30,16 @@ export default factories.createCoreController('api::order.order', ({ strapi: Str
 
         return {
             success: true
+        }
+    },
+    async telegramHook(ctx) {
+
+        // const chatId = ctx.request.body.message.chat.id;
+
+
+
+        return {
+            ok: true
         }
     },
 
@@ -79,7 +91,7 @@ export default factories.createCoreController('api::order.order', ({ strapi: Str
     async create(ctx) {
         const { user: { id } } = ctx.state;
 
-        const { cartIds, provinceId, districtId } = ctx.request.body.data;
+        const { cartIds, provinceId, districtId, phone } = ctx.request.body.data;
 
         if (!cartIds || cartIds.length < 0 || !provinceId || !districtId) {
             return ctx.badRequest(' id is missing', { cartIds, provinceId, districtId })
@@ -119,6 +131,36 @@ export default factories.createCoreController('api::order.order', ({ strapi: Str
         cartIds.forEach((id) => {
             promisesdDel.push(strapi.entityService.delete('api::cart.cart', id));
         });
+
+
+        const telegramAPi = strapi.config.get('telegram.telegramAPI')
+        const bot = new Telegraf(telegramAPi, {
+            telegram: { webhookReply: true },
+        });
+
+        console.log(province);
+        console.log(district);
+
+        console.log(items);
+
+
+
+
+        await bot.telegram.sendMessage(-868283463, `
+            # ORDER
+            Phone: ${phone}
+            Provice:  ${province.name}
+            District:  ${district.name}
+            
+        `, {
+            // reply_markup: {
+            //     inline_keyboard: [
+            //         [{ text: "Delivery", callback_data: `data-` }],
+            //     ]
+
+            // }
+        });
+
 
         return await Promise.all(promisesdDel);
     },

@@ -6,4 +6,5 @@ exports.default = ({ env }) => ({
     app: {
         keys: env.array('APP_KEYS'),
     },
+    // telegramAPI: env.string("TELEGRAM_API")
 });

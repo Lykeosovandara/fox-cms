@@ -12,5 +12,15 @@ exports.default = {
                 }
             }
         },
+        {
+            method: 'POST',
+            path: '/order/telegram',
+            handler: 'api::order.order.telegramHook',
+            config: {
+                find: {
+                    auth: false
+                }
+            }
+        },
     ],
 };

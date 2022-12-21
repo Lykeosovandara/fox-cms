@@ -4,7 +4,8 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const strapi_1 = require("@strapi/strapi");
-exports.default = strapi_1.factories.createCoreController('api::order.order', ({ strapi: Strapi }) => ({
+const { Telegraf } = require('telegraf');
+exports.default = strapi_1.factories.createCoreController('api::order.order', ({ strapi }) => ({
     async updateProfile(ctx) {
         const { user: { id } } = ctx.state;
         const { image } = ctx.request.body.data;
@@ -16,6 +17,12 @@ exports.default = strapi_1.factories.createCoreController('api::order.order', ({
         });
         return {
             success: true
+        };
+    },
+    async telegramHook(ctx) {
+        // const chatId = ctx.request.body.message.chat.id;
+        return {
+            ok: true
         };
     },
     async find(ctx) {
@@ -53,7 +60,7 @@ exports.default = strapi_1.factories.createCoreController('api::order.order', ({
     },
     async create(ctx) {
         const { user: { id } } = ctx.state;
-        const { cartIds, provinceId, districtId } = ctx.request.body.data;
+        const { cartIds, provinceId, districtId, phone } = ctx.request.body.data;
         if (!cartIds || cartIds.length < 0 || !provinceId || !districtId) {
             return ctx.badRequest(' id is missing', { cartIds, provinceId, districtId });
         }
@@ -80,6 +87,26 @@ exports.default = strapi_1.factories.createCoreController('api::order.order', ({
         let promisesdDel = [];
         cartIds.forEach((id) => {
             promisesdDel.push(strapi.entityService.delete('api::cart.cart', id));
+        });
+        const telegramAPi = strapi.config.get('telegram.telegramAPI');
+        const bot = new Telegraf(telegramAPi, {
+            telegram: { webhookReply: true },
+        });
+        console.log(province);
+        console.log(district);
+        console.log(items);
+        await bot.telegram.sendMessage(-868283463, `
+            # ORDER
+            Phone: ${phone}
+            Provice:  ${province.name}
+            District:  ${district.name}
+            
+        `, {
+        // reply_markup: {
+        //     inline_keyboard: [
+        //         [{ text: "Delivery", callback_data: `data-` }],
+        //     ]
+        // }
         });
         return await Promise.all(promisesdDel);
     },
