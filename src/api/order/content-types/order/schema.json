@@ -61,6 +61,11 @@
         "Declined"
       ],
       "default": "Pending"
+    },
+    "discount": {
+      "type": "decimal",
+      "default": 0,
+      "required": true
     }
   }
 }

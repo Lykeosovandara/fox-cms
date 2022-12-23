@@ -4,4 +4,9 @@
 
 import { factories } from '@strapi/strapi';
 
-export default factories.createCoreService('api::order.order');
+export default factories.createCoreService('api::order.order', ({ strapi }) => ({
+
+
+
+
+}));

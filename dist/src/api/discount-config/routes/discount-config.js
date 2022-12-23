@@ -1,7 +1,7 @@
 "use strict";
 /**
- * order service
+ * discount-config router
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const strapi_1 = require("@strapi/strapi");
-exports.default = strapi_1.factories.createCoreService('api::order.order', ({ strapi }) => ({}));
+exports.default = strapi_1.factories.createCoreRouter('api::discount-config.discount-config');

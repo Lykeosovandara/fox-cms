@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "discount_configs",
+  "info": {
+    "singularName": "discount-config",
+    "pluralName": "discount-configs",
+    "displayName": "DiscountConfig"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "total": {
+      "type": "decimal",
+      "default": 0,
+      "required": true,
+      "min": 0
+    },
+    "discount": {
+      "type": "integer",
+      "default": 0,
+      "min": 0,
+      "max": 45
+    }
+  }
+}
