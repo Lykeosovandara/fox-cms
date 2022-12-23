@@ -130,7 +130,7 @@ export default factories.createCoreController('api::order.order', ({ strapi }: {
             province,
             district
         }
-        const total = items.reduce((a, b) => a + (b.varient.price, b.qty), 0);
+        const total = items.reduce((a, b) => a + (b.varient.price * b.qty), 0);
         const deliveryCost = district.price;
         const newDiscount = orderTotalFromBigger(discountes);
         const discount = getDiscountByTotal(total, newDiscount);
