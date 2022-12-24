@@ -13,8 +13,9 @@ export default factories.createCoreController('api::discount-config.discount-con
             sort: { createdAt: 'desc' },
         })
 
-        return discountes;
-
+        return {
+            data: discountes
+        };
 
     }
 
