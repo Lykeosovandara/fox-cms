@@ -3,6 +3,7 @@
  */
 
 import { factories } from '@strapi/strapi'
+import { orderTotalFromBigger } from '../../order/controllers/help';
 
 export default factories.createCoreController('api::discount-config.discount-config', ({ strapi }) => ({
 
@@ -13,8 +14,10 @@ export default factories.createCoreController('api::discount-config.discount-con
             sort: { createdAt: 'desc' },
         })
 
+        const newDiscount = orderTotalFromBigger(discountes);
+
         return {
-            data: discountes
+            data: newDiscount
         };
 
     }
