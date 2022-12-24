@@ -136,7 +136,7 @@ export default factories.createCoreController('api::order.order', ({ strapi }: {
         const discount = getDiscountByTotal(total, newDiscount);
         const totalDiscount = calculateDiscount(total, discount)
 
-        ctx.request.body.data = { ...ctx.request.body.data, items, total: totalDiscount, owner: id, addressDelivery, province: provinceId, district: districtId, deliveryCost, discount };
+        ctx.request.body.data = { ...ctx.request.body.data, items, total: totalDiscount, owner: id, addressDelivery, province: provinceId, district: districtId, deliveryCost, discount, subTotal: total };
 
         await strapi.entityService.create("api::order.order", ctx.request.body);
 

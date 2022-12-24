@@ -66,6 +66,11 @@
             "type": "decimal",
             "default": 0,
             "required": true
+        },
+        "subTotal": {
+            "type": "decimal",
+            "required": true,
+            "default": 0
         }
     }
 }

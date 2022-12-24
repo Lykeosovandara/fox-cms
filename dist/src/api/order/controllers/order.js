@@ -94,7 +94,7 @@ exports.default = strapi_1.factories.createCoreController('api::order.order', ({
         const newDiscount = (0, help_1.orderTotalFromBigger)(discountes);
         const discount = (0, help_1.getDiscountByTotal)(total, newDiscount);
         const totalDiscount = (0, help_1.calculateDiscount)(total, discount);
-        ctx.request.body.data = { ...ctx.request.body.data, items, total: totalDiscount, owner: id, addressDelivery, province: provinceId, district: districtId, deliveryCost, discount };
+        ctx.request.body.data = { ...ctx.request.body.data, items, total: totalDiscount, owner: id, addressDelivery, province: provinceId, district: districtId, deliveryCost, discount, subTotal: total };
         await strapi.entityService.create("api::order.order", ctx.request.body);
         let promisesdDel = [];
         cartIds.forEach((id) => {
