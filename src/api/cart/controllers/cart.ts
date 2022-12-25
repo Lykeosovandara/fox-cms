@@ -43,7 +43,12 @@ export default factories.createCoreController('api::cart.cart', ({ strapi: Strap
                     id: {
                         $eq: varient ?? 0
                     },
-                }
+                },
+                owner: {
+                    id: {
+                        $eq: id
+                    }
+                },
             },
         })
 

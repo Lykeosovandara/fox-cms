@@ -33,7 +33,12 @@ exports.default = strapi_1.factories.createCoreController('api::cart.cart', ({ s
                     id: {
                         $eq: varient !== null && varient !== void 0 ? varient : 0
                     },
-                }
+                },
+                owner: {
+                    id: {
+                        $eq: id
+                    }
+                },
             },
         });
         if (cart) {
