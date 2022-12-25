@@ -31,6 +31,9 @@ export default factories.createCoreController('api::cart.cart', ({ strapi: Strap
         const { user: { id } } = ctx.state;
 
         const { varient } = ctx.request.body.data;
+
+        console.log("Incoming data for cart create:", ctx.request.body.data);
+
         ctx.request.body.data = { ...ctx.request.body.data, owner: id, publishedAt: Date.now() };
 
         const [cart] = await strapi.entityService.findMany('api::cart.cart', {
