@@ -37,6 +37,7 @@ exports.default = strapi_1.factories.createCoreController('api::cart.cart', ({ s
             },
         });
         if (cart) {
+            console.log("CART Is Existing");
             let oldQty = cart.qty;
             oldQty += 1;
             const updatedResponse = await strapi.entityService
@@ -44,6 +45,7 @@ exports.default = strapi_1.factories.createCoreController('api::cart.cart', ({ s
             return updatedResponse;
         }
         else {
+            console.log("Create new cart");
             return await strapi.entityService.create("api::cart.cart", ctx.request.body);
         }
     },

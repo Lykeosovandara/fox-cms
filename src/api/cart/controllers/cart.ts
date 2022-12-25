@@ -48,12 +48,16 @@ export default factories.createCoreController('api::cart.cart', ({ strapi: Strap
         })
 
         if (cart) {
+
+            console.log("CART Is Existing");
+
             let oldQty = cart.qty;
             oldQty += 1;
             const updatedResponse = await strapi.entityService
                 .update('api::cart.cart', cart.id, { data: { qty: oldQty } })
             return updatedResponse;
         } else {
+            console.log("Create new cart");
             return await strapi.entityService.create("api::cart.cart", ctx.request.body);
         }
 
