@@ -45,7 +45,7 @@ exports.default = strapi_1.factories.createCoreController('api::cart.cart', ({ s
             return updatedResponse;
         }
         else {
-            console.log("Create new cart");
+            console.log("Create new cart", ctx.request.body.data);
             return await strapi.entityService.create("api::cart.cart", ctx.request.body);
         }
     },

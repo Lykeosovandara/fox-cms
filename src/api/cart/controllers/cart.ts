@@ -57,7 +57,7 @@ export default factories.createCoreController('api::cart.cart', ({ strapi: Strap
                 .update('api::cart.cart', cart.id, { data: { qty: oldQty } })
             return updatedResponse;
         } else {
-            console.log("Create new cart");
+            console.log("Create new cart", ctx.request.body.data);
             return await strapi.entityService.create("api::cart.cart", ctx.request.body);
         }
 
