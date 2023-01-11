@@ -18,17 +18,15 @@ exports.default = strapi_1.factories.createCoreController('api::cart.cart', ({ s
                     }
                 },
             },
-            where: {
-                varient: {
-                    $null: true,
-                },
-            },
         });
         return { data, meta };
     },
     async create(ctx) {
         const { user: { id } } = ctx.state;
         const { varient } = ctx.request.body.data;
+        if (!varient) {
+            return ctx.badRequest('varient id is missing', { varient });
+        }
         console.log("Incoming data for cart create:", ctx.request.body.data);
         ctx.request.body.data = { ...ctx.request.body.data, owner: id, publishedAt: Date.now() };
         const [cart] = await strapi.entityService.findMany('api::cart.cart', {

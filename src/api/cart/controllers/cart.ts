@@ -21,12 +21,9 @@ export default factories.createCoreController('api::cart.cart', ({ strapi: Strap
                             $eq: id
                         }
                     },
+
                 },
-                where: {
-                    varient: {
-                        $null: true,
-                    },
-                },
+
             }
         )
 
@@ -36,6 +33,10 @@ export default factories.createCoreController('api::cart.cart', ({ strapi: Strap
         const { user: { id } } = ctx.state;
 
         const { varient } = ctx.request.body.data;
+
+        if (!varient) {
+            return ctx.badRequest('varient id is missing', { varient })
+        }
 
         console.log("Incoming data for cart create:", ctx.request.body.data);
 
