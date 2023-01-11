@@ -21,7 +21,12 @@ export default factories.createCoreController('api::cart.cart', ({ strapi: Strap
                             $eq: id
                         }
                     },
-                }
+                },
+                where: {
+                    varient: {
+                        $null: true,
+                    },
+                },
             }
         )
 
